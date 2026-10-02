@@ -1,0 +1,20 @@
+generated: '2026-10-02'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.editsquare.com/api/webhooks.md
+sources:
+- https://docs.editsquare.com/api/webhooks.md
+description: Edit Square delivers webhook events as POST requests with a JSON payload.
+events:
+- event: render.status_changed
+  description: A render's status changes, including both `complete` and `failed`.
+- event: render.complete
+  description: A render finished successfully.
+- event: render.failed
+  description: A render stopped with an error.
+delivery:
+  signature: X-Webhook-Signature header containing `sha256=<hex>` HMAC‑SHA256 of the raw body keyed with the endpoint's secret
+  retries: up to five attempts (first attempt plus four retries) with exponential backoff starting at one second; each attempt times out after
+    15 seconds
+note: Each delivery also includes headers X-Webhook-ID, X-Webhook-Timestamp, and User-Agent.
+docs: https://docs.editsquare.com/api/webhooks.md

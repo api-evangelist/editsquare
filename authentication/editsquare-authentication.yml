@@ -1,0 +1,15 @@
+generated: '2026-10-02'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.editsquare.com/api/authentication.md
+sources:
+- https://docs.editsquare.com/api/authentication.md
+description: 'All Edit Square endpoints are authenticated using API keys as a bearer token:'
+schemes:
+- type: http-bearer
+  name: Bearer
+  evidence: 'All Edit Square endpoints are authenticated using API keys as a bearer token:'
+  location: header
+  header: Authorization
+  how_to_obtain: 'Keys are created in the dashboard: open the dashboard, click your avatar, choose API Keys, create a key and give it a name.'
+docs: https://docs.editsquare.com/api/authentication.md

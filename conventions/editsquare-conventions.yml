@@ -1,0 +1,22 @@
+generated: '2026-10-02'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://docs.editsquare.com/api/pagination.md
+sources:
+- https://docs.editsquare.com/api/pagination.md
+- https://docs.editsquare.com/api/authentication.md
+idempotency:
+  coverage: none
+  evidence: The documentation does not describe any idempotency key mechanism.
+pagination:
+  style: cursor
+  params:
+  - limit
+  - cursor
+  response_fields:
+  - data
+  - has_more
+  - next_cursor
+  evidence: List endpoints use cursor‑based pagination via the `cursor` parameter. Each response includes `data`, `has_more`, and `next_cursor`.
+authentication: 'Bearer token API key (`Authorization: Bearer sk_…`). All endpoints require this header; missing header yields 401.'
+docs: https://docs.editsquare.com/api/pagination.md

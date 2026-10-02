@@ -1,0 +1,65 @@
+generated: '2026-10-02'
+method: searched
+generator: extract-docs-artifacts.py (local)
+source: https://editsquare.com/pricing/
+sources:
+- https://editsquare.com/pricing/
+name: Edit Square pricing
+audience: business-product
+pricing_basis: per-seat
+plans:
+- name: Free
+  price_text: $0
+  price: 0
+  billing_period: monthly
+  features:
+  - GPU editor with unlimited renders
+  - 720p exports with a watermark
+  - Cloud save and storage
+  - Extra seats
+  - Cloud render credits
+  - Cloud and API renders
+  - Template forms
+  - Private sharing
+- name: Individual
+  price_text: $25
+  price: 25
+  billing_period: monthly
+  features:
+  - GPU editor with unlimited renders
+  - Up to 4K exports, no watermark
+  - 5 GB of cloud storage
+  - Extra seats
+  - 150 cloud render credits a month
+  - Cloud and API renders
+  - Template forms
+  - Private sharing
+- name: Premium
+  price_text: $60
+  price: 60
+  billing_period: monthly
+  features:
+  - GPU editor with unlimited renders
+  - Up to 4K exports, no watermark
+  - 10 GB of cloud storage
+  - Extra seats at $60 a month
+  - 150 cloud render credits a month
+  - Cloud and API renders
+  - Template forms
+  - Private sharing
+- name: Enterprise
+  price_text: Custom
+  features:
+  - GPU editor with unlimited renders
+  - Up to 4K exports, no watermark
+  - Custom storage
+  - Custom cloud render credits
+  - Cloud and API renders
+  - Template forms
+  - Private sharing
+  - Custom agreement and invoicing
+  - Support and availability commitments
+  limits:
+  - name: pricing_basis
+    limit_text: negotiated
+docs: https://editsquare.com/pricing/

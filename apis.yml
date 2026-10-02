@@ -1,29 +1,129 @@
 aid: editsquare
+
 name: Edit Square
-description: 'Edit Square is a company surfaced via the API Evangelist harvest backlog (source: new-submission)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: Edit Square provides a browser‑based motion graphics editor that lets users create, template, and automate animated video at scale.
+  Through a simple API, developers can generate renders by sending data to templates, retrieve finished videos, and integrate video creation into
+  their applications. The platform offers a free tier for basic editing and paid plans with higher resolution, watermark‑free exports, cloud rendering,
+  and team collaboration features. Edit Square aims to democratize video production for marketers, developers, and creators without requiring
+  design expertise.
+
 url: https://raw.githubusercontent.com/api-evangelist/editsquare/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:new-submission
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-02 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-02'
+
 modified: '2026-10-02'
+
 tags:
-- Company
-apis: []
+- Motion Graphics
+- Video Editing
+- API
+- Cloud Rendering
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: Plans
+  url: plans/editsquare-plans-pricing.yml
+- type: Spectral
+  url: rules/editsquare-rules.yml
+- type: JSONLD
+  url: json-ld/editsquare-context.jsonld
+- type: Vocabulary
+  url: vocabulary/editsquare-vocabulary.yml
+- type: Webhooks
+  url: asyncapi/editsquare-webhooks.yml
+- type: DataModel
+  url: data-model/editsquare-data-model.yml
+- type: Conventions
+  url: conventions/editsquare-conventions.yml
+- type: Authentication
+  url: authentication/editsquare-authentication.yml
+- type: ErrorCatalog
+  url: errors/editsquare-problem-types.yml
+- type: Conformance
+  url: conformance/editsquare-conformance.yml
+- type: Overlay
+  url: overlays/editsquare-openapi-overlay.yaml
+- type: LLMsTxt
+  url: llms/editsquare-llms.txt
+- type: Hosts
+  url: hosts/editsquare-hosts.yml
+- type: Vendors
+  url: vendors/editsquare-vendors.yml
+- type: TermsOfService
+  url: https://editsquare.com/terms
+- type: PrivacyPolicy
+  url: https://editsquare.com/privacy
+- type: Pricing
+  url: https://editsquare.com/pricing
+- type: Blog
+  url: https://blog.editsquare.com/
+- type: APIReference
+  url: https://docs.editsquare.com/llms-full.txt
+- type: DomainSecurity
+  url: security/editsquare-domain-security.yml
 - type: Website
   url: https://editsquare.com/
 - type: Documentation
   url: https://docs.editsquare.com/
+- type: DeveloperPortal
+  url: https://app.editsquare.com/
+- type: Support
+  url: https://dashboard.editsquare.com/login
+
+apis:
+- name: Edit Square API
+  description: API for creating video renders, managing projects, templates, and teams.
+  humanURL: https://docs.editsquare.com/api/
+  baseURL: https://api.editsquare.com
+  properties: []
+  aid: editsquare:edit-square-api
+- aid: editsquare:edit-square-api-api
+  name: Edit Square API API
+  description: 'The Edit Square API is used to create videos from a project''s templates, along with supporting endpoints for the resources around
+
+    them.'
+  humanURL: https://docs.editsquare.com/llms-full.txt
+  baseURL: https://api.editsquare.com
+  properties:
+  - type: OpenAPI
+    url: openapi/_original/editsquare-api-openapi.json
+  - type: JSONSchema
+    url: json-schema/editsquare-render-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-team-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-render-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-user-schema.json
+
 x-submission-notes: Template-based video rendering API (renders, projects, templates, teams).
-x-submission-probe: root 200; docs redirect to /api/; api.editsquare.com/openapi.json OpenAPI 3.1.0 11
-  paths (/v1/renders, /v1/templates...); llms.txt soft (homepage); 404 probe 200 SOFT-404 on editsquare.com
+
+x-submission-probe: root 200; docs redirect to /api/; api.editsquare.com/openapi.json OpenAPI 3.1.0 11 paths (/v1/renders, /v1/templates...);
+  llms.txt soft (homepage); 404 probe 200 SOFT-404 on editsquare.com
+
 x-submitted-by: support@editsquare.com (apis.io/add, 2026-09-30)
+x-enrichment:
+  date: '2026-10-02'
+  status: enriched
+  artifacts_added: 27
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

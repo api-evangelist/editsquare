@@ -1,0 +1,96 @@
+generated: '2026-10-02'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/_original/editsquare-api-openapi.json
+vocabulary:
+  name: Edit Square Domain Vocabulary
+  description: 'Terms declared by Edit Square''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-02'
+  terms:
+  - term: Renders
+    definition: A render turns a project into a video file. Create one, then poll it or wait for the webhook.
+    tags:
+    - Resource Group
+    source: openapi/_original/editsquare-api-openapi.json
+  - term: Projects
+    definition: A project is what someone builds in the editor and what renders are made from. Projects are read-only through the API.
+    tags:
+    - Resource Group
+    source: openapi/_original/editsquare-api-openapi.json
+  - term: Templates
+    definition: A template is the set of fields a project exposes for filling in when creating a render.
+    tags:
+    - Resource Group
+    source: openapi/_original/editsquare-api-openapi.json
+  - term: Teams
+    definition: A team owns projects and is what renders are billed to. An API key reaches the teams its owner belongs to, plus every team under
+      an account they administer.
+    tags:
+    - Resource Group
+    source: openapi/_original/editsquare-api-openapi.json
+  - term: Users
+    definition: The people on a team. `GET /v1/me` resolves the user an API key acts as - the quickest way to see what a key can reach.
+    tags:
+    - Resource Group
+    source: openapi/_original/editsquare-api-openapi.json
+  - term: RenderList
+    definition: 'Object declared by the contract with fields: data, has_more, next_cursor.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/RenderList
+  - term: Render
+    definition: 'Object declared by the contract with fields: id, name, status, type, project, output, created_by, created_at, updated_at.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/Render
+  - term: ErrorResponse
+    definition: 'Object declared by the contract with fields: error.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/ErrorResponse
+  - term: ProjectList
+    definition: 'Object declared by the contract with fields: data, has_more, next_cursor.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/ProjectList
+  - term: Project
+    definition: 'Object declared by the contract with fields: id, name, team, created_by, thumbnail_url, created_at, updated_at.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/Project
+  - term: TemplateList
+    definition: 'Object declared by the contract with fields: data.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/TemplateList
+  - term: TemplateSummary
+    definition: 'Object declared by the contract with fields: id, name, description, project_id, target_composition_id, field_count.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/TemplateSummary
+  - term: TemplateField
+    definition: 'Object declared by the contract with fields: key, label, description, kind, widget, default_value.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/TemplateField
+  - term: TeamList
+    definition: 'Object declared by the contract with fields: data.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/TeamList
+  - term: Team
+    definition: 'Object declared by the contract with fields: id, name, account_id, role, created_at.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/Team
+  - term: User
+    definition: 'Object declared by the contract with fields: id, email, created_at.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/User
+  - term: TeamMemberList
+    definition: 'Object declared by the contract with fields: data.'
+    tags:
+    - Object
+    source: openapi/_original/editsquare-api-openapi.json#/components/schemas/TeamMemberList

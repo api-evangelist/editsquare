@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/editsquare/main/json-schema/editsquare-project-list-schema.json",
+  "title": "ProjectList",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/editsquare-api-openapi.json#/components/schemas/ProjectList",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Project"
+      }
+    },
+    "has_more": {
+      "type": "boolean",
+      "description": "Whether another page follows."
+    },
+    "next_cursor": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Pass as `cursor` to read the next page. Null on the last page."
+    }
+  },
+  "required": [
+    "data",
+    "has_more",
+    "next_cursor"
+  ],
+  "$defs": {
+    "Project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "team": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "name"
+          ]
+        },
+        "created_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "thumbnail_url": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A signed, time-limited still of the project. Null until one has been rendered."
+        },
+        "created_at": {
+          "type": "number"
+        },
+        "updated_at": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "team",
+        "created_by",
+        "thumbnail_url",
+        "created_at",
+        "updated_at"
+      ]
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/editsquare/main/json-schema/editsquare-render-list-schema.json",
+  "title": "RenderList",
+  "x-generated": "2026-10-02",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/editsquare-api-openapi.json#/components/schemas/RenderList",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/Render"
+      }
+    },
+    "has_more": {
+      "type": "boolean",
+      "description": "Whether another page follows."
+    },
+    "next_cursor": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Pass as `cursor` to read the next page. Null on the last page."
+    }
+  },
+  "required": [
+    "data",
+    "has_more",
+    "next_cursor"
+  ],
+  "$defs": {
+    "Render": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "initializing",
+            "ready",
+            "queued",
+            "processing",
+            "finalizing",
+            "complete",
+            "failed"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "local",
+            "cloud"
+          ]
+        },
+        "project": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "team": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "team"
+          ]
+        },
+        "output": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Signed URLs for the finished video, keyed by variant (the master plus any smaller encodes). Present once the render is complete. The URLs are time-limited."
+        },
+        "created_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "created_at": {
+          "type": "number"
+        },
+        "updated_at": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "status",
+        "type",
+        "project",
+        "created_by",
+        "created_at",
+        "updated_at"
+      ]
+    }
+  }
+}

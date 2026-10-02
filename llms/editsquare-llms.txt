@@ -1,0 +1,22 @@
+# Edit Square Docs
+
+> Reference and guides for the Edit Square API - create renders, track them, and wire up webhooks.
+
+## Documentation sets
+
+- [Full documentation](https://docs.editsquare.com/llms-full.txt): every page concatenated, source-faithful (mermaid, math, asides, components preserved as text).
+- [Abridged documentation](https://docs.editsquare.com/llms-small.txt): only top-level pages and section overviews.
+
+## Introduction
+
+- [Introduction](https://docs.editsquare.com/api.md): Render motion graphics programmatically - send data to your template and get a finished video back.
+- [Authentication](https://docs.editsquare.com/api/authentication.md): How Edit Square API keys work, where to get one, and what they can reach.
+- [Errors](https://docs.editsquare.com/api/errors.md): The status codes the API returns, the shape of an error body, and what to do with each.
+- [Pagination](https://docs.editsquare.com/api/pagination.md): How list endpoints page, what the envelope carries, and how to walk every page.
+- [Projects API reference](https://docs.editsquare.com/api/reference-llms/projects.md): A project is what someone builds in the editor and what renders are made from. Projects are read-only through the API.
+- [Renders API reference](https://docs.editsquare.com/api/reference-llms/renders.md): A render turns a project into a video file. Create one, then poll it or wait for the webhook.
+- [Teams API reference](https://docs.editsquare.com/api/reference-llms/teams.md): A team owns projects and is what renders are billed to. An API key reaches the teams its owner belongs to, plus every team under an account they administer.
+- [Templates API reference](https://docs.editsquare.com/api/reference-llms/templates.md): A template is the set of fields a project exposes for filling in when creating a render.
+- [Users API reference](https://docs.editsquare.com/api/reference-llms/users.md): The people on a team. `GET /v1/me` resolves the user an API key acts as - the quickest way to see what a key can reach.
+- [Renders](https://docs.editsquare.com/api/renders.md): The render lifecycle - statuses, values, outputs, and how to track one.
+- [Webhooks](https://docs.editsquare.com/api/webhooks.md): Receive render events instead of polling - payloads, signature verification and retries.
