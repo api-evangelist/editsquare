@@ -1,0 +1,116 @@
+openapi: 3.2.0
+info:
+  title: Edit Square Teams API
+  version: 1.0.0
+  description: 'The Edit Square API is used to create videos from a project''s templates, along with supporting endpoints for the resources around them.
+
+
+    This document is published at https://api.editsquare.com/openapi.json.'
+servers:
+- url: https://api.editsquare.com
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Teams
+  description: A team owns projects and is what renders are billed to. An API key reaches the teams its owner belongs to, plus every team under an account they administer.
+paths:
+  /v1/teams:
+    get:
+      operationId: listTeams
+      summary: List teams
+      description: Lists every team this API key can reach.
+      tags:
+      - Teams
+      responses:
+        '200':
+          description: The teams the key can reach
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamList'
+  /v1/teams/{id}:
+    get:
+      operationId: getTeam
+      summary: Get a team
+      description: Retrieves a single team.
+      tags:
+      - Teams
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: team_jn7fw41m8n5jtht7hxsy69tzg97gvef8
+          description: Team ID
+        required: true
+        description: Team ID
+        name: id
+        in: path
+      responses:
+        '200':
+          description: The team
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '404':
+          description: Team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
+    TeamList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+      required:
+      - data
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+          example: team_jn7fw41m8n5jtht7hxsy69tzg97gvef8
+        name:
+          type: string
+          example: Brand team
+        account_id:
+          type: string
+          example: acc_jh716ctpaqbye9aw64tgkqwtks7gvx7g
+        role:
+          type:
+          - string
+          - 'null'
+          enum:
+          - admin
+          - member
+          - null
+          example: admin
+          description: The caller's role on this team.
+        created_at:
+          type: number
+          example: 1748875980
+      required:
+      - id
+      - name
+      - account_id
+      - role
+      - created_at
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: 'An Edit Square API key, sent as `Authorization: Bearer <key>`. Keys are created per team in the dashboard.'

@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  title: Edit Square Templates API
+  version: 1.0.0
+  description: 'The Edit Square API is used to create videos from a project''s templates, along with supporting endpoints for the resources around them.
+
+
+    This document is published at https://api.editsquare.com/openapi.json.'
+servers:
+- url: https://api.editsquare.com
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Templates
+  description: A template is the set of fields a project exposes for filling in when creating a render.
+paths:
+  /v1/templates:
+    get:
+      operationId: listTemplates
+      summary: List templates
+      description: Lists the templates a project exposes, in the order the project defines them.
+      tags:
+      - Templates
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
+          description: Project ID
+        required: true
+        description: Project ID
+        name: project_id
+        in: query
+      responses:
+        '200':
+          description: The project's templates
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateList'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/templates/{template_id}:
+    get:
+      operationId: getTemplate
+      summary: Get a template
+      description: Retrieves one template, including every field it exposes - the keys a render's `values` object can set.
+      tags:
+      - Templates
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: tpl_8f2c1d4e6a7b9c0d1e2f3a4b5c6d7e8f
+          description: Template ID
+        required: true
+        description: Template ID
+        name: template_id
+        in: path
+      - schema:
+          type: string
+          minLength: 1
+          example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
+          description: Project ID
+        required: true
+        description: Project ID
+        name: project_id
+        in: query
+      responses:
+        '200':
+          description: The template
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+        '404':
+          description: Template not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
+    Template:
+      allOf:
+      - $ref: '#/components/schemas/TemplateSummary'
+      - type: object
+        properties:
+          fields:
+            type: array
+            items:
+              $ref: '#/components/schemas/TemplateField'
+        required:
+        - fields
+    TemplateList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSummary'
+      required:
+      - data
+    TemplateField:
+      type: object
+      properties:
+        key:
+          type: string
+          example: customer_name
+          description: The key to use in a render's `values` object.
+        label:
+          type:
+          - string
+          - 'null'
+          example: Customer name
+        description:
+          type:
+          - string
+          - 'null'
+          example: Shown on the opening card.
+        kind:
+          type: string
+          example: control
+          description: What the field drives.
+        widget:
+          type:
+          - string
+          - 'null'
+          example: text
+          description: How the editor renders the input.
+        default_value:
+          anyOf:
+          - type: string
+          - type: number
+          - type: boolean
+          - type: 'null'
+          example: Acme
+          description: Used when a render omits this key.
+      required:
+      - key
+      - label
+      - description
+      - kind
+      - widget
+      - default_value
+    TemplateSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          example: tpl_8f2c1d4e6a7b9c0d1e2f3a4b5c6d7e8f
+        name:
+          type: string
+          example: Welcome video
+        description:
+          type:
+          - string
+          - 'null'
+          example: One clip per new customer.
+        project_id:
+          type: string
+          example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
+        target_composition_id:
+          type: string
+          example: comp_4f1f0f7c
+          description: The composition this template renders.
+        field_count:
+          type: number
+          example: 3
+      required:
+      - id
+      - name
+      - description
+      - project_id
+      - target_composition_id
+      - field_count
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: 'An Edit Square API key, sent as `Authorization: Bearer <key>`. Keys are created per team in the dashboard.'

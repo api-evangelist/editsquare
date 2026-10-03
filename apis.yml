@@ -92,16 +92,18 @@ apis:
   baseURL: https://api.editsquare.com
   properties: []
   aid: editsquare:edit-square-api
-- aid: editsquare:edit-square-api-api
-  name: Edit Square API API
-  description: 'The Edit Square API is used to create videos from a project''s templates, along with supporting endpoints for the resources around
-
-    them.'
-  humanURL: https://docs.editsquare.com/llms-full.txt
+- aid: editsquare:editsquare-projects-api
+  name: Edit Square Projects API
+  description: >-
+    A project is what someone builds in the editor and what renders are made from. Projects are read-only
+    through the API.
+  humanURL: https://docs.editsquare.com/api/
   baseURL: https://api.editsquare.com
+  tags:
+  - Projects
   properties:
   - type: OpenAPI
-    url: openapi/_original/editsquare-api-openapi.json
+    url: openapi/editsquare-projects-api-openapi.yml
   - type: JSONSchema
     url: json-schema/editsquare-render-schema.json
   - type: JSONSchema
@@ -114,7 +116,99 @@ apis:
     url: json-schema/editsquare-render-list-schema.json
   - type: JSONSchema
     url: json-schema/editsquare-user-schema.json
-
+- aid: editsquare:editsquare-renders-api
+  name: Edit Square Renders API
+  description: >-
+    A render turns a project into a video file. Create one, then poll it or wait for the webhook.
+  humanURL: https://docs.editsquare.com/api/
+  baseURL: https://api.editsquare.com
+  tags:
+  - Renders
+  properties:
+  - type: OpenAPI
+    url: openapi/editsquare-renders-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/editsquare-render-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-team-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-render-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-user-schema.json
+- aid: editsquare:editsquare-teams-api
+  name: Edit Square Teams API
+  description: >-
+    A team owns projects and is what renders are billed to. An API key reaches the teams its owner belongs
+    to, plus every team under an account they administer.
+  humanURL: https://docs.editsquare.com/api/
+  baseURL: https://api.editsquare.com
+  tags:
+  - Teams
+  properties:
+  - type: OpenAPI
+    url: openapi/editsquare-teams-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/editsquare-render-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-team-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-render-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-user-schema.json
+- aid: editsquare:editsquare-templates-api
+  name: Edit Square Templates API
+  description: A template is the set of fields a project exposes for filling in when creating a render.
+  humanURL: https://docs.editsquare.com/api/
+  baseURL: https://api.editsquare.com
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/editsquare-templates-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/editsquare-render-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-team-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-render-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-user-schema.json
+- aid: editsquare:editsquare-users-api
+  name: Edit Square Users API
+  description: >-
+    The people on a team. `GET /v1/me` resolves the user an API key acts as - the quickest way to see
+    what a key can reach.
+  humanURL: https://docs.editsquare.com/api/
+  baseURL: https://api.editsquare.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/editsquare-users-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/editsquare-render-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-team-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-project-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-render-list-schema.json
+  - type: JSONSchema
+    url: json-schema/editsquare-user-schema.json
 x-submission-notes: Template-based video rendering API (renders, projects, templates, teams).
 
 x-submission-probe: root 200; docs redirect to /api/; api.editsquare.com/openapi.json OpenAPI 3.1.0 11 paths (/v1/renders, /v1/templates...);

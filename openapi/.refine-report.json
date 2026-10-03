@@ -1,0 +1,22 @@
+{
+  "provider": "editsquare",
+  "sources": [
+    "_original/editsquare-api-openapi.json"
+  ],
+  "outputs": [
+    "editsquare-projects-api-openapi.yml",
+    "editsquare-renders-api-openapi.yml",
+    "editsquare-teams-api-openapi.yml",
+    "editsquare-templates-api-openapi.yml",
+    "editsquare-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "editsquare-api-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+5 apis, 6 total)"
+  ],
+  "skipped": []
+}

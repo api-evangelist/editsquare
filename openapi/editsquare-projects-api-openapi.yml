@@ -1,0 +1,195 @@
+openapi: 3.2.0
+info:
+  title: Edit Square Projects API
+  version: 1.0.0
+  description: 'The Edit Square API is used to create videos from a project''s templates, along with supporting endpoints for the resources around them.
+
+
+    This document is published at https://api.editsquare.com/openapi.json.'
+servers:
+- url: https://api.editsquare.com
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Projects
+  description: A project is what someone builds in the editor and what renders are made from. Projects are read-only through the API.
+paths:
+  /v1/projects:
+    get:
+      operationId: listProjects
+      summary: List projects
+      description: Lists a team's projects, newest first.
+      tags:
+      - Projects
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 60
+          example: 20
+          description: How many to return. 1–60, 20 by default.
+        required: false
+        description: How many to return. 1–60, 20 by default.
+        name: limit
+        in: query
+      - schema:
+          type: string
+          description: The `next_cursor` of the previous page. Omit for the first page.
+        required: false
+        description: The `next_cursor` of the previous page. Omit for the first page.
+        name: cursor
+        in: query
+      - schema:
+          type: string
+          minLength: 1
+          example: team_jn7fw41m8n5jtht7hxsy69tzg97gvef8
+          description: The team whose projects to list.
+        required: true
+        description: The team whose projects to list.
+        name: team_id
+        in: query
+      - schema:
+          type: string
+          example: campaign
+          description: Filter by name. Matches are returned by relevance rather than by date.
+        required: false
+        description: Filter by name. Matches are returned by relevance rather than by date.
+        name: search
+        in: query
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: desc
+          description: Oldest or newest first. Newest by default, and ignored when `search` is set.
+        required: false
+        description: Oldest or newest first. Newest by default, and ignored when `search` is set.
+        name: order
+        in: query
+      responses:
+        '200':
+          description: A page of projects
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '404':
+          description: Team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/projects/{id}:
+    get:
+      operationId: getProject
+      summary: Get a project
+      description: Retrieves a single project.
+      tags:
+      - Projects
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
+          description: Project ID
+        required: true
+        description: Project ID
+        name: id
+        in: path
+      responses:
+        '200':
+          description: The project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '404':
+          description: Project not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
+    ProjectList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        has_more:
+          type: boolean
+          example: false
+          description: Whether another page follows.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Pass as `cursor` to read the next page. Null on the last page.
+      required:
+      - data
+      - has_more
+      - next_cursor
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
+        name:
+          type: string
+          example: Summer campaign
+        team:
+          type: object
+          properties:
+            id:
+              type: string
+              example: team_jn7fw41m8n5jtht7hxsy69tzg97gvef8
+            name:
+              type: string
+              example: Brand team
+          required:
+          - id
+          - name
+        created_by:
+          type:
+          - string
+          - 'null'
+          example: user_k970b359khfwwny0q8fjah1hc97gtcwm
+        thumbnail_url:
+          type:
+          - string
+          - 'null'
+          description: A signed, time-limited still of the project. Null until one has been rendered.
+        created_at:
+          type: number
+          example: 1748875980
+        updated_at:
+          type:
+          - number
+          - 'null'
+          example: 1748875986
+      required:
+      - id
+      - name
+      - team
+      - created_by
+      - thumbnail_url
+      - created_at
+      - updated_at
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: 'An Edit Square API key, sent as `Authorization: Bearer <key>`. Keys are created per team in the dashboard.'

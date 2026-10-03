@@ -1,0 +1,150 @@
+openapi: 3.2.0
+info:
+  title: Edit Square Users API
+  version: 1.0.0
+  description: 'The Edit Square API is used to create videos from a project''s templates, along with supporting endpoints for the resources around them.
+
+
+    This document is published at https://api.editsquare.com/openapi.json.'
+servers:
+- url: https://api.editsquare.com
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Users
+  description: The people on a team. `GET /v1/me` resolves the user an API key acts as - the quickest way to see what a key can reach.
+paths:
+  /v1/me:
+    get:
+      operationId: getMe
+      summary: Get the current user
+      description: Resolves the user this API key belongs to.
+      tags:
+      - Users
+      responses:
+        '200':
+          description: The user the key acts as
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /v1/users:
+    get:
+      operationId: listUsers
+      summary: List team members
+      description: Lists the members of a team, with each member's role.
+      tags:
+      - Users
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: team_jn7fw41m8n5jtht7hxsy69tzg97gvef8
+          description: The team whose members to list.
+        required: true
+        description: The team whose members to list.
+        name: team_id
+        in: query
+      responses:
+        '200':
+          description: The team's members
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMemberList'
+        '404':
+          description: Team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/users/{id}:
+    get:
+      operationId: getUser
+      summary: Get a user
+      description: Retrieves a user the caller shares a team with.
+      tags:
+      - Users
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: user_k970b359khfwwny0q8fjah1hc97gtcwm
+          description: User ID
+        required: true
+        description: User ID
+        name: id
+        in: path
+      responses:
+        '200':
+          description: The user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
+    TeamMember:
+      allOf:
+      - $ref: '#/components/schemas/User'
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - admin
+            - member
+            example: member
+          joined_at:
+            type: number
+            example: 1748875980
+        required:
+        - role
+        - joined_at
+    TeamMemberList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+      required:
+      - data
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: user_k970b359khfwwny0q8fjah1hc97gtcwm
+        email:
+          type:
+          - string
+          - 'null'
+          example: ada@example.com
+        created_at:
+          type: number
+          example: 1748875980
+      required:
+      - id
+      - email
+      - created_at
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: 'An Edit Square API key, sent as `Authorization: Bearer <key>`. Keys are created per team in the dashboard.'

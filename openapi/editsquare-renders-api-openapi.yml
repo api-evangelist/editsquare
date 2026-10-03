@@ -1,0 +1,263 @@
+openapi: 3.2.0
+info:
+  title: Edit Square Renders API
+  version: 1.0.0
+  description: 'The Edit Square API is used to create videos from a project''s templates, along with supporting endpoints for the resources around them.
+
+
+    This document is published at https://api.editsquare.com/openapi.json.'
+servers:
+- url: https://api.editsquare.com
+  description: Production
+security:
+- apiKey: []
+tags:
+- name: Renders
+  description: A render turns a project into a video file. Create one, then poll it or wait for the webhook.
+paths:
+  /v1/renders:
+    get:
+      operationId: listRenders
+      summary: List renders
+      description: Lists the renders of one project, newest first.
+      tags:
+      - Renders
+      parameters:
+      - schema:
+          type: integer
+          minimum: 1
+          maximum: 60
+          example: 20
+          description: How many to return. 1–60, 20 by default.
+        required: false
+        description: How many to return. 1–60, 20 by default.
+        name: limit
+        in: query
+      - schema:
+          type: string
+          description: The `next_cursor` of the previous page. Omit for the first page.
+        required: false
+        description: The `next_cursor` of the previous page. Omit for the first page.
+        name: cursor
+        in: query
+      - schema:
+          type: string
+          minLength: 1
+          example: proj_j123456789
+          description: Project ID
+        required: true
+        description: Project ID
+        name: project_id
+        in: query
+      - schema:
+          type: string
+          example: welcome
+          description: Filter by name. Matches are returned by relevance rather than by date.
+        required: false
+        description: Filter by name. Matches are returned by relevance rather than by date.
+        name: search
+        in: query
+      - schema:
+          type: string
+          enum:
+          - initializing
+          - ready
+          - queued
+          - processing
+          - finalizing
+          - complete
+          - failed
+          example: complete
+          description: Return only renders with this status.
+        required: false
+        description: Return only renders with this status.
+        name: status
+        in: query
+      - schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          example: desc
+          description: Oldest or newest first. Newest by default, and ignored when `search` is set.
+        required: false
+        description: Oldest or newest first. Newest by default, and ignored when `search` is set.
+        name: order
+        in: query
+      responses:
+        '200':
+          description: A page of renders
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RenderList'
+    post:
+      operationId: createRender
+      summary: Create a new render
+      description: Queues a render of a project. Pass `template_id` and `values` to render the project with a form submission applied; omit both to render it as it stands.
+      tags:
+      - Renders
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 250
+                project_id:
+                  type: string
+                  minLength: 1
+                template_id:
+                  type: string
+                values:
+                  type: object
+                  additionalProperties: {}
+              required:
+              - name
+              - project_id
+      responses:
+        '201':
+          description: Render created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Render'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /v1/renders/{id}:
+    get:
+      operationId: getRender
+      summary: Get a render
+      description: Retrieves a single render, including its status and - once complete - the signed URLs of its output.
+      tags:
+      - Renders
+      parameters:
+      - schema:
+          type: string
+          minLength: 1
+          example: rend_j123456789
+          description: Render ID
+        required: true
+        description: Render ID
+        name: id
+        in: path
+      responses:
+        '200':
+          description: Retrieve the render
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Render'
+        '404':
+          description: Render not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
+    RenderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Render'
+        has_more:
+          type: boolean
+          example: false
+          description: Whether another page follows.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Pass as `cursor` to read the next page. Null on the last page.
+      required:
+      - data
+      - has_more
+      - next_cursor
+    Render:
+      type: object
+      properties:
+        id:
+          type: string
+          example: rend_jh716ctpaqbye9aw64tgkqwtks7gvx7g
+        name:
+          type: string
+          example: My New Shiny Render
+        status:
+          type: string
+          enum:
+          - initializing
+          - ready
+          - queued
+          - processing
+          - finalizing
+          - complete
+          - failed
+        type:
+          type: string
+          enum:
+          - local
+          - cloud
+        project:
+          type: object
+          properties:
+            id:
+              type: string
+              example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
+            team:
+              type: string
+              example: team_jn7fw41m8n5jtht7hxsy69tzg97gvef8
+          required:
+          - id
+          - team
+        output:
+          type: object
+          additionalProperties:
+            type: string
+          description: Signed URLs for the finished video, keyed by variant (the master plus any smaller encodes). Present once the render is complete. The URLs are time-limited.
+          example:
+            master: https://files.editsquare.com/renders/rend_jh716ctpaqbye9aw64tgkqwtks7gvx7g/master.mp4?signature=...
+        created_by:
+          type:
+          - string
+          - 'null'
+          example: user_k970b359khfwwny0q8fjah1hc97gtcwm
+        created_at:
+          type: number
+          example: 1748875980
+        updated_at:
+          type:
+          - number
+          - 'null'
+          example: 1748875986
+      required:
+      - id
+      - name
+      - status
+      - type
+      - project
+      - created_by
+      - created_at
+      - updated_at
+  securitySchemes:
+    apiKey:
+      type: http
+      scheme: bearer
+      description: 'An Edit Square API key, sent as `Authorization: Bearer <key>`. Keys are created per team in the dashboard.'
