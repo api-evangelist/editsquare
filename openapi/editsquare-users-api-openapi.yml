@@ -99,32 +99,6 @@ components:
           example: Render not found
       required:
       - error
-    TeamMember:
-      allOf:
-      - $ref: '#/components/schemas/User'
-      - type: object
-        properties:
-          role:
-            type: string
-            enum:
-            - admin
-            - member
-            example: member
-          joined_at:
-            type: number
-            example: 1748875980
-        required:
-        - role
-        - joined_at
-    TeamMemberList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TeamMember'
-      required:
-      - data
     User:
       type: object
       properties:
@@ -143,6 +117,32 @@ components:
       - id
       - email
       - created_at
+    TeamMemberList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamMember'
+      required:
+      - data
+    TeamMember:
+      allOf:
+      - $ref: '#/components/schemas/User'
+      - type: object
+        properties:
+          role:
+            type: string
+            enum:
+            - admin
+            - member
+            example: member
+          joined_at:
+            type: number
+            example: 1748875980
+        required:
+        - role
+        - joined_at
   securitySchemes:
     apiKey:
       type: http

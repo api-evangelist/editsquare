@@ -163,14 +163,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Render not found
-      required:
-      - error
     RenderList:
       type: object
       properties:
@@ -191,6 +183,14 @@ components:
       - data
       - has_more
       - next_cursor
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
     Render:
       type: object
       properties:

@@ -69,15 +69,6 @@ components:
           example: Render not found
       required:
       - error
-    TeamList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Team'
-      required:
-      - data
     Team:
       type: object
       properties:
@@ -109,6 +100,15 @@ components:
       - account_id
       - role
       - created_at
+    TeamList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+      required:
+      - data
   securitySchemes:
     apiKey:
       type: http

@@ -16,7 +16,13 @@
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "editsquare-api-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "apis.yml register: written (+5 apis, 6 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "editsquare-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "editsquare-renders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "editsquare-teams-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "editsquare-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "editsquare-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
