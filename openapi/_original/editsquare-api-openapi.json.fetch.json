@@ -1,0 +1,12 @@
+{
+ "url": "https://api.editsquare.com/openapi.json",
+ "requested_url": "https://api.editsquare.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 16939,
+ "sha256": "6d12c9418b425e435dfcdd5e16918aa297f94ea07e5ebcf3bdae512beeb7ad25",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
