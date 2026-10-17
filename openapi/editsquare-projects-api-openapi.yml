@@ -113,6 +113,26 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ProjectList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+        has_more:
+          type: boolean
+          example: false
+          description: Whether another page follows.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Pass as `cursor` to read the next page. Null on the last page.
+      required:
+      - data
+      - has_more
+      - next_cursor
     Project:
       type: object
       properties:
@@ -168,26 +188,6 @@ components:
           example: Render not found
       required:
       - error
-    ProjectList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-        has_more:
-          type: boolean
-          example: false
-          description: Whether another page follows.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Pass as `cursor` to read the next page. Null on the last page.
-      required:
-      - data
-      - has_more
-      - next_cursor
   securitySchemes:
     apiKey:
       type: http

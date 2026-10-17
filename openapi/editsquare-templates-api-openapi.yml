@@ -86,37 +86,14 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    TemplateSummary:
+    ErrorResponse:
       type: object
       properties:
-        id:
+        error:
           type: string
-          example: tpl_8f2c1d4e6a7b9c0d1e2f3a4b5c6d7e8f
-        name:
-          type: string
-          example: Welcome video
-        description:
-          type:
-          - string
-          - 'null'
-          example: One clip per new customer.
-        project_id:
-          type: string
-          example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
-        target_composition_id:
-          type: string
-          example: comp_4f1f0f7c
-          description: The composition this template renders.
-        field_count:
-          type: number
-          example: 3
+          example: Render not found
       required:
-      - id
-      - name
-      - description
-      - project_id
-      - target_composition_id
-      - field_count
+      - error
     Template:
       allOf:
       - $ref: '#/components/schemas/TemplateSummary'
@@ -128,23 +105,6 @@ components:
               $ref: '#/components/schemas/TemplateField'
         required:
         - fields
-    TemplateList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TemplateSummary'
-      required:
-      - data
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Render not found
-      required:
-      - error
     TemplateField:
       type: object
       properties:
@@ -187,6 +147,46 @@ components:
       - kind
       - widget
       - default_value
+    TemplateList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TemplateSummary'
+      required:
+      - data
+    TemplateSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          example: tpl_8f2c1d4e6a7b9c0d1e2f3a4b5c6d7e8f
+        name:
+          type: string
+          example: Welcome video
+        description:
+          type:
+          - string
+          - 'null'
+          example: One clip per new customer.
+        project_id:
+          type: string
+          example: proj_jd71dcg41pjy7rax1v2h4pvcmd7gtar9
+        target_composition_id:
+          type: string
+          example: comp_4f1f0f7c
+          description: The composition this template renders.
+        field_count:
+          type: number
+          example: 3
+      required:
+      - id
+      - name
+      - description
+      - project_id
+      - target_composition_id
+      - field_count
   securitySchemes:
     apiKey:
       type: http

@@ -61,14 +61,15 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
+    TeamList:
       type: object
       properties:
-        error:
-          type: string
-          example: Render not found
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
       required:
-      - error
+      - data
     Team:
       type: object
       properties:
@@ -100,15 +101,14 @@ components:
       - account_id
       - role
       - created_at
-    TeamList:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Team'
+        error:
+          type: string
+          example: Render not found
       required:
-      - data
+      - error
   securitySchemes:
     apiKey:
       type: http

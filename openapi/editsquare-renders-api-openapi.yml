@@ -163,34 +163,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    RenderList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Render'
-        has_more:
-          type: boolean
-          example: false
-          description: Whether another page follows.
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Pass as `cursor` to read the next page. Null on the last page.
-      required:
-      - data
-      - has_more
-      - next_cursor
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Render not found
-      required:
-      - error
     Render:
       type: object
       properties:
@@ -256,6 +228,34 @@ components:
       - created_by
       - created_at
       - updated_at
+    RenderList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Render'
+        has_more:
+          type: boolean
+          example: false
+          description: Whether another page follows.
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Pass as `cursor` to read the next page. Null on the last page.
+      required:
+      - data
+      - has_more
+      - next_cursor
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
   securitySchemes:
     apiKey:
       type: http

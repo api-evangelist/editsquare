@@ -91,32 +91,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          example: Render not found
-      required:
-      - error
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          example: user_k970b359khfwwny0q8fjah1hc97gtcwm
-        email:
-          type:
-          - string
-          - 'null'
-          example: ada@example.com
-        created_at:
-          type: number
-          example: 1748875980
-      required:
-      - id
-      - email
-      - created_at
     TeamMemberList:
       type: object
       properties:
@@ -143,6 +117,32 @@ components:
         required:
         - role
         - joined_at
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: user_k970b359khfwwny0q8fjah1hc97gtcwm
+        email:
+          type:
+          - string
+          - 'null'
+          example: ada@example.com
+        created_at:
+          type: number
+          example: 1748875980
+      required:
+      - id
+      - email
+      - created_at
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Render not found
+      required:
+      - error
   securitySchemes:
     apiKey:
       type: http
