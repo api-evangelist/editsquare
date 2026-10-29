@@ -64,5 +64,145 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Edit Square is a company surfaced via the API Evangelist harvest backlog (source: new-submission) and added to the network as a stub for full-pipeline profiling.
-- https://editsquare.com/
+Edit Square provides a browser‑based motion graphics editor that lets users create, template, and automate animated video at scale. Through a simple API, developers can generate renders by sending data to templates, retrieve finished videos, and integrate video creation into their applications. The platform offers a free tier for basic editing and paid plans with higher resolution, watermark‑free exports, cloud rendering, and team collaboration features. Edit Square aims to democratize video production for marketers, developers, and creators without requiring design expertise.
+
+**Areas:** Motion Graphics · Video Editing · Cloud Rendering
+
+## Edit Square on APIs.io
+
+Everything profiled for Edit Square is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/editsquare/](https://apis.io/providers/editsquare/)** — or go straight to one of the APIs or properties below.
+
+### APIs (6)
+
+- [Edit Square API](https://apis.io/apis/editsquare/edit-square-api/) — API for creating video renders, managing projects, templates, and teams.
+- [Edit Square Projects API](https://apis.io/apis/editsquare/editsquare-projects-api/) — A project is what someone builds in the editor and what renders are made from. Projects are read-only through the API.
+- [Edit Square Renders API](https://apis.io/apis/editsquare/editsquare-renders-api/) — A render turns a project into a video file. Create one, then poll it or wait for the webhook.
+- [Edit Square Teams API](https://apis.io/apis/editsquare/editsquare-teams-api/) — A team owns projects and is what renders are billed to. An API key reaches the teams its owner belongs to, plus every team under an account they administer.
+- [Edit Square Templates API](https://apis.io/apis/editsquare/editsquare-templates-api/) — A template is the set of fields a project exposes for filling in when creating a render.
+- [Edit Square Users API](https://apis.io/apis/editsquare/editsquare-users-api/) — The people on a team. `GET /v1/me` resolves the user an API key acts as - the quickest way to see what a key can reach.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Editsquare Webhooks](https://apis.io/asyncapis/editsquare/editsquare-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [editsquare-mcp.yml](https://apis.io/servers/editsquare/editsquare-mcp-yml/)
+
+#### JSON Schema (6)
+
+The data models the API reads and writes.
+
+- [Project](https://apis.io/schemas/editsquare/editsquare-project/)
+- [ProjectList](https://apis.io/schemas/editsquare/editsquare-project-list/)
+- [Render](https://apis.io/schemas/editsquare/editsquare-render/)
+- [RenderList](https://apis.io/schemas/editsquare/editsquare-render-list/)
+- [Team](https://apis.io/schemas/editsquare/editsquare-team/)
+- [User](https://apis.io/schemas/editsquare/editsquare-user/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Editsquare Context](https://apis.io/jsonld/editsquare/editsquare-context/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Editsquare Openapi Overlay](https://apis.io/overlays/editsquare/editsquare-openapi-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Edit Square API Rules](https://apis.io/rules/editsquare/editsquare-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Editsquare Authentication](https://apis.io/security/editsquare/editsquare-authentication/)
+- [Editsquare Domain Security](https://apis.io/security/editsquare/editsquare-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Editsquare Plans Pricing](https://apis.io/plans/editsquare/editsquare-plans-pricing/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://editsquare.com/)
+- [Documentation](https://docs.editsquare.com/)
+- [API reference](https://docs.editsquare.com/llms-full.txt)
+- [Pricing](https://editsquare.com/pricing)
+- [Support](https://dashboard.editsquare.com/login)
+- [Blog](https://blog.editsquare.com/)
+- [Terms of service](https://editsquare.com/terms)
+- [Privacy policy](https://editsquare.com/privacy)
+
+## API Evangelist rating
+
+**Kin Score 49.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 60.7 |
+| Contract quality | 70.2 |
+| Contract governance | 22.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 45.2 |
+| Access clarity | 63.2 |
+
+**Agent readiness 26.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/editsquare/](https://apis.io/providers/editsquare/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Edit Square: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/editsquare/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
